@@ -46,18 +46,23 @@ def plot_result(img_raw, idx):
     plt.axis('off')
     plt.show()
 
+    return
+
 
 def test_image(img_path, model_path):
     img_raw, img_pad = load_image(img_path)
+
     rows = img_raw.shape[0]
     cols = img_raw.shape[1]
     test_set_shape = [cols, tm.PATCH_SIZE,
-                      tm.PATCH_SIZE, tm.IMAGE_CHANNEL]
+                      tm.PATCH_SIZE, tm.CHANNEL_NUM]
+    print(test_set_shape)
 
     x = tf.placeholder(tf.float32, test_set_shape)
     net = tm.build_network(x)
     y_out = tf.reshape(net.outputs, shape=[cols, tm.CLASS_NUM])
     y_stm = tf.nn.softmax(y_out)
+    print(y_stm.shape)
 
     sess = tf.InteractiveSession()
     load_params = tl.files.load_npz(path='', name=model_path)
@@ -72,14 +77,16 @@ def test_image(img_path, model_path):
                             c:c + tm.PATCH_SIZE, :]
 
         prob = y_stm.eval(feed_dict={x: x_})
-        idx = np.where(prob[:, 5] > HIGH_PROB)[0]
-        prob_map[r, idx] = prob[idx, 5]
+        temp = np.where(prob[:, 5] > HIGH_PROB)[0]
+        prob_map[r, temp] = prob[temp, 5]
 
     sess.close()
 
     idx = strict_local_maximum(prob_map)
     plot_result(img_raw, idx)
 
+    return
+
 
 if __name__ == '__main__':
-    test_image('ImageSet/Test/img_50.png', 'model.npz')
+    test_image('ImageSet/Test/img_41.png', 'model.npz')

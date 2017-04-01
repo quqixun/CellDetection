@@ -5,7 +5,7 @@ import tensorflow as tf
 import tensorlayer as tl
 
 
-NUM_EPOCHS = 20
+NUM_EPOCHS = 1
 BATCH_SIZE = 200
 LEARNING_RATE = 0.001
 
