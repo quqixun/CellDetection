@@ -40,7 +40,12 @@ def strict_local_maximum(prob_map):
     return idx
 
 
-def plot_result(img_raw, idx):
+def plot_save_result(img_raw, idx, save_path):
+    img_temp = np.copy(img_raw)
+    for i in range(len(idx[0])):
+        img_temp[idx[0][i], idx[1][i]] = [255, 0, 0]
+    Image.fromarray(img_temp).save(save_path)
+
     plt.imshow(img_raw)
     plt.scatter(idx[1], idx[0], c='r', s=10)
     plt.axis('off')
@@ -49,7 +54,9 @@ def plot_result(img_raw, idx):
     return
 
 
-def test_image(img_path, model_path):
+def test_image(img_path,
+               model_path='model.npz',
+               save_path='test.png'):
     img_raw, img_pad = load_image(img_path)
 
     rows = img_raw.shape[0]
@@ -83,10 +90,12 @@ def test_image(img_path, model_path):
     sess.close()
 
     idx = strict_local_maximum(prob_map)
-    plot_result(img_raw, idx)
+    plot_save_result(img_raw, idx, save_path)
 
     return
 
 
 if __name__ == '__main__':
-    test_image('ImageSet/Test/img_41.png', 'model.npz')
+    test_image('ImageSet/Test/img_41.png',
+               'model.npz',
+               'test1.png')
