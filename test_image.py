@@ -47,7 +47,7 @@ def plot_result(img_raw, idx):
     plt.show()
 
 
-def test_image(img_path):
+def test_image(img_path, model_path):
     img_raw, img_pad = load_image(img_path)
     rows = img_raw.shape[0]
     cols = img_raw.shape[1]
@@ -60,7 +60,7 @@ def test_image(img_path):
     y_stm = tf.nn.softmax(y_out)
 
     sess = tf.InteractiveSession()
-    load_params = tl.files.load_npz(path='', name='cell.npz')
+    load_params = tl.files.load_npz(path='', name=model_path)
     tl.files.assign_params(sess, load_params, net)
 
     prob_map = np.zeros([rows, cols])
@@ -82,4 +82,4 @@ def test_image(img_path):
 
 
 if __name__ == '__main__':
-    test_image('ImageSet/Test/img_50.png')
+    test_image('ImageSet/Test/img_50.png', 'model.npz')
