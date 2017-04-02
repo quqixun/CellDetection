@@ -5,7 +5,7 @@ import tensorflow as tf
 import tensorlayer as tl
 
 
-NUM_EPOCHS = 1
+NUM_EPOCHS = 10
 BATCH_SIZE = 200
 LEARNING_RATE = 0.001
 
@@ -112,12 +112,12 @@ def train_model(train_set_path,
     thread = tf.train.start_queue_runners(sess=sess, coord=coord)
 
     try:
-        step = 0
+        step = 1
         while not coord.should_stop():
             [tris, tril] = sess.run([tri_img, tri_lbl])
             fd_train = {x: tris, y: reshape_labels(tril)}
 
-            if step % 10 == 0:
+            if step % 10 == 0 or step == 1:
                 [vals, vall] = sess.run([val_img, val_lbl])
                 fd_val = {x: vals, y: reshape_labels(vall)}
 
