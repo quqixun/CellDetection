@@ -58,6 +58,6 @@ In terminal,
 
 <img src="https://github.com/quqixun/CellDetection/blob/master/Results/test7.png" width="500">
 
-Here is a bad case, in which several cells have not been detected. Increasing the number of training patches is able to solve this problem. The model is trainded by 29,818 patches generates the bad result as shown above. If the number of data is augmented by rotating and modifing HSV color space, the model is likely to perform better. The better result image is shown as below, which is detected by the model that is trained with 321,985 training patches.
+Here is a bad case, in which several cells have not been detected. Increasing the number of training patches is able to solve this problem. The model is trainded by 29,818 patches generates the bad result as shown above. If the number of data is augmented by rotating and modifing HSV color space, the model is likely to perform better. The better result image is shown as below, which is detected by the model that is trained with 321,985 training patches. (This image is obtained from the solution in Matlab, data augmentation is not included in this repository.)
 
 <img src="https://github.com/quqixun/CellDetection/blob/master/Results/bad_2_good.png" width="500">
