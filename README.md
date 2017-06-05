@@ -44,7 +44,7 @@ A sample of testing image is shown below.
 
 In terminal,
 
-+ **Step 1**: run **python read_data.py** to create TFRecords
++ **Step 1**: run **python read_data.py** to create TFRecords (change the folder path and the name of TFRecords)
 + **Step 2**: run **python train_model.py** to train and save model
 + **Step 3**: run **python test_image.py** to test full-scale images
 
